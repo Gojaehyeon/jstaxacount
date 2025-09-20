@@ -52,8 +52,12 @@
 			var st = $(window).scrollTop();
 			if (st > 50) {
 				$('.gtco-nav').addClass('scrolled');
+				// 스크롤 시 검은색 로고로 변경
+				$('#logo-img').attr('src', 'images/logo_black.png');
 			} else {
 				$('.gtco-nav').removeClass('scrolled');
+				// 상단으로 돌아갈 때 원래 로고로 변경
+				$('#logo-img').attr('src', 'images/logo.png');
 			}
 		});
    

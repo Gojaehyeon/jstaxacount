@@ -127,9 +127,10 @@ h1, h2, h3, h4, h5, h6, figure {
   align-items: center;
   justify-content: center;
 }
-#pav {
-  width:45px; height:45px;
-  margin-bottom: 6px;
+#logo-img {
+  height: 60px;
+  width: auto;
+  max-width: 200px;
 }
 .br {
   line-height: 1.5;
@@ -143,19 +144,22 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-nav ul {
   padding: 0;
-  margin: 1px 0 0 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 60px;
 }
 .gtco-nav ul li {
   padding: 0;
   margin: 0;
-  padding-top: 20px;
   list-style: none;
   display: inline;
 
 }
 .gtco-nav ul li a {
   font-size: 18px;
-  padding: 30px 15px;
+  padding: 0 15px;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
   font-weight: 400 !important;
@@ -163,6 +167,9 @@ h1, h2, h3, h4, h5, h6, figure {
   -o-transition: 0.5s;
   transition: 0.5s;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  height: 60px;
 }
 .gtco-nav ul li a:hover, .gtco-nav ul li a:focus, .gtco-nav ul li a:active {
   color: #fff;
@@ -263,7 +270,11 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-nav.scrolled ul {
   padding: 0;
-  margin: 1px 0 0 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 60px;
 }
 .gtco-nav.scrolled ul li {
   padding: 0;
@@ -273,6 +284,10 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-nav.scrolled ul li a {
   color: rgba(0, 0, 0, 0.5);
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  height: 60px;
 }
 .gtco-nav.scrolled ul li a:hover {
   color: black;
