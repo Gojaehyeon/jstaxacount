@@ -5,18 +5,31 @@
   font-weight: normal;
   font-style: normal;
 }
+/* Global Scrollbar Fix */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 /* =======================================================
 *
 * 	Template Style 
 *
 * ======================================================= */
+
 body {
   font-family: "Open Sans", Arial, sans-serif;
   font-weight: 400;
   font-size: 19px;
   line-height: 1.8;
   color: #777;
-  background: #fff;
+  background: #f8f9fa;
 }
 
 #page {
@@ -86,11 +99,13 @@ h1, h2, h3, h4, h5, h6, figure {
   margin: 0;
   padding: 0;
   width: 100%;
-  padding: 20px 0;
+  padding: 30px 0;
   z-index: 1001;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
+  -webkit-transition: 0.3s, transform 0.3s ease-in-out;
+  -o-transition: 0.3s, transform 0.3s ease-in-out;
+  transition: 0.3s, transform 0.3s ease-in-out;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  background: rgba(0, 0, 0, 0.7);
 }
 @media screen and (max-width: 768px) {
   .gtco-nav {
@@ -125,16 +140,35 @@ h1, h2, h3, h4, h5, h6, figure {
 #gtco-logo {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  font-family: 'Arial', 'Helvetica', sans-serif;
 }
-#logo-img {
-  height: 60px;
-  width: auto;
-  max-width: 200px;
+
+.logo-text {
+  color: #fff;
+  text-decoration: none;
+}
+
+.logo-main {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.logo-sub {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
 }
 .br {
   line-height: 1.5;
-  margin-top: -50px;
+  margin-top: 80px;
+  font-weight: 800;
 }
 
 @media screen and (max-width: 768px) {
@@ -148,7 +182,8 @@ h1, h2, h3, h4, h5, h6, figure {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  height: 60px;
+  height: 50px;
+  font-family: 'Arial', 'Helvetica', sans-serif;
 }
 .gtco-nav ul li {
   padding: 0;
@@ -159,17 +194,19 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-nav ul li a {
   font-size: 18px;
-  padding: 0 15px;
+  padding: 0 25px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: 400 !important;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700 !important;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
   white-space: nowrap;
   display: flex;
   align-items: center;
-  height: 60px;
+  height: 50px;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  letter-spacing: 1px;
 }
 .gtco-nav ul li a:hover, .gtco-nav ul li a:focus, .gtco-nav ul li a:active {
   color: #fff;
@@ -262,8 +299,23 @@ h1, h2, h3, h4, h5, h6, figure {
 .gtco-nav ul li.active > a {
   color: #fff !important;
 }
+.gtco-nav:hover {
+  background: #000;
+}
+
+.gtco-nav:hover .logo-text {
+  color: #fff;
+}
+
+.gtco-nav:hover ul li a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.gtco-nav:hover ul li a:hover {
+  color: #fff;
+}
 .gtco-nav.scrolled {
-  background: #fff;
+  background: #000 !important;
   webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
@@ -274,7 +326,8 @@ h1, h2, h3, h4, h5, h6, figure {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  height: 60px;
+  height: 50px;
+  font-family: 'Arial', 'Helvetica', sans-serif;
 }
 .gtco-nav.scrolled ul li {
   padding: 0;
@@ -283,17 +336,19 @@ h1, h2, h3, h4, h5, h6, figure {
   display: inline;
 }
 .gtco-nav.scrolled ul li a {
-  color: rgba(0, 0, 0, 0.5);
-  padding: 0 15px;
+  color: rgba(255, 255, 255, 0.9) !important;
+  padding: 0 25px;
   display: flex;
   align-items: center;
-  height: 60px;
+  height: 50px;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  font-size: 18px;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 .gtco-nav.scrolled ul li a:hover {
-  color: black;
-}
-.gtco-nav.scrolled ul li.active > a {
-  color: #12083F !important;
+  color: #fff;
 }
 .gtco-nav.scrolled ul li.btn-cta a {
   color: #fff;
@@ -304,12 +359,52 @@ h1, h2, h3, h4, h5, h6, figure {
   padding: 4px 20px;
   color: #fff;
 }
-.gtco-nav.scrolled #gtco-logo em, .gtco-nav.scrolled #gtco-logo a {
-  color: #000;
+.gtco-nav.scrolled .logo-text {
+  color: #fff !important;
 }
 
-#gtco-hero .gtco-video-link a {
-  color: rgba(255, 255, 255, 0.5);
+.gtco-nav.scrolled #gtco-logo em, .gtco-nav.scrolled #gtco-logo a {
+  color: #fff;
+}
+
+/* Hero Section Styles */
+.hero-content {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 50px;
+}
+
+.hero-slogan {
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.main-slogan {
+  font-size: 80px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  letter-spacing: -1px;
+}
+
+@media screen and (max-width: 768px) {
+  .main-slogan {
+    font-size: 40px;
+  }
+  .hero-content {
+    padding-left: 20px;
+  }
+  .hero-slogan {
+    left: 20px;
+  }
 }
 #gtco-hero .gtco-video-link a i {
   font-size: 78px;
@@ -445,11 +540,10 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .gtco-cover {
-  height: 900px;
+  height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  float: left;
   width: 100%;
 }
 .gtco-cover a {
@@ -473,19 +567,19 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 @media screen and (max-width: 768px) {
   .gtco-cover {
-    height: 600px;
+    height: 100vh;
   }
 }
 .gtco-cover .display-t,
 .gtco-cover .display-tc {
-  height: 900px;
+  height: 100vh;
   display: table;
   width: 100%;
 }
 @media screen and (max-width: 768px) {
   .gtco-cover .display-t,
   .gtco-cover .display-tc {
-    height: 600px;
+    height: 100vh;
   }
 }
 .gtco-cover.gtco-cover-sm {
@@ -543,6 +637,9 @@ h1, h2, h3, h4, h5, h6, figure {
 #gtco-contact {
   padding: 7em 0;
   clear: both;
+  background: #fff;
+  position: relative;
+  z-index: 10;
 }
 
 #gtco-about .img-shadow {
@@ -1341,7 +1438,7 @@ form label {
 }
 
 .js .animate-box {
-  opacity: 0;
+  opacity: 1;
 }
 .sang {
   text-align: center;
@@ -1384,3 +1481,170 @@ padding: 10px;
   border: 1px solid white;
   padding: 10px;
   }
+
+/* 주요 업무 섹션 h1 볼드하게 */
+#gtco-practice-areas h1 {
+  font-weight: 800;
+}
+
+#gtco-our-team h1 {
+  font-weight: 800;
+}
+
+/* 서비스 카드 스타일 */
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.service-header {
+  background: #2c3e50;
+  color: #fff;
+  padding: 25px 30px;
+  text-align: center;
+}
+
+.service-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.service-content {
+  padding: 30px;
+}
+
+.service-category {
+  margin-bottom: 25px;
+}
+
+.service-category:last-child {
+  margin-bottom: 0;
+}
+
+.service-category h4 {
+  color: #2c3e50;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #3498db;
+  display: inline-block;
+}
+
+.service-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-content li {
+  padding: 10px 0;
+  color: #555;
+  font-size: 17px;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 20px;
+}
+
+.service-content li:before {
+  content: "•";
+  color: #000;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.service-content li:hover {
+  color: #2c3e50;
+}
+
+/* 헤더 숨김 애니메이션 */
+.gtco-nav.header-hidden {
+  transform: translateY(-100%);
+}
+
+/* 햄버거 버튼 완전 숨김 */
+.gtco-nav-toggle,
+.js-gtco-nav-toggle {
+  display: none !important;
+}
+
+#gtco-offcanvas {
+  display: none !important;
+}
+
+/* 모바일 최적화 */
+@media screen and (max-width: 768px) {
+  /* 헤더 높이 줄이기 */
+  .gtco-nav {
+    padding: 15px 0;
+  }
+  
+  .gtco-nav ul {
+    height: 40px;
+  }
+  
+  .gtco-nav ul li a {
+    height: 40px;
+    font-size: 16px;
+    padding: 0 15px;
+  }
+  
+  /* 로고 크기 조정 및 가운데 정렬 */
+  .logo-main {
+    font-size: 20px;
+  }
+  
+  .logo-sub {
+    font-size: 10px;
+  }
+  
+  /* 모바일에서 로고 가운데 정렬 */
+  .col-sm-2 {
+    text-align: center;
+    width: 100%;
+  }
+  
+  #gtco-logo {
+    justify-content: center !important;
+    text-align: center;
+  }
+  
+  /* 메뉴 숨김 */
+  .main-nav {
+    display: none;
+  }
+  
+  /* 서비스 카드 반응형 */
+  .service-header {
+    padding: 20px 25px;
+  }
+  
+  .service-header h2 {
+    font-size: 20px;
+  }
+  
+  .service-content {
+    padding: 25px;
+  }
+  
+  .service-category h4 {
+    font-size: 18px;
+  }
+  
+  .service-content li {
+    font-size: 16px;
+  }
+}

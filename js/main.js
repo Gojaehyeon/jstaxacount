@@ -48,8 +48,13 @@
 	
 
 	var header = function() {
+		var lastScrollTop = 0;
+		var isMobileDevice = isMobile.any();
+		
 		$(window).scroll(function(){
 			var st = $(window).scrollTop();
+			
+			// 스크롤 상태에 따른 헤더 스타일 변경
 			if (st > 50) {
 				$('.gtco-nav').addClass('scrolled');
 				// 스크롤 시 검은색 로고로 변경
@@ -59,72 +64,31 @@
 				// 상단으로 돌아갈 때 원래 로고로 변경
 				$('#logo-img').attr('src', 'images/logo.png');
 			}
+   
+			// 모바일에서만 헤더 숨김/보임 기능
+			if (isMobileDevice) {
+				if (st > lastScrollTop && st > 100) {
+					// 아래로 스크롤할 때 헤더 숨김
+					$('.gtco-nav').addClass('header-hidden');
+				} else {
+					// 위로 스크롤할 때 헤더 보임
+					$('.gtco-nav').removeClass('header-hidden');
+				}
+				lastScrollTop = st;
+			}
 		});
    
 	};
 
 	var navigation = function() {
-
-		$('body').on('click', '#gtco-offcanvas ul a:not([class="external"]), .main-nav a:not([class="external"])', function(event){
-			var section = $(this).data('nav-section');
-				if ( $('[data-section="' + section + '"]').length ) {
-			    	$('html, body').animate({
-			        	scrollTop: $('[data-section="' + section + '"]').offset().top - 55
-			    	}, 500, 'easeInOutExpo');
-			   }
-
-			   if ($('body').hasClass('offcanvas')) {
-			   	$('body').removeClass('offcanvas');
-			   	$('.js-gtco-nav-toggle').removeClass('active');
-			   }
-		   event.preventDefault();
-		   return false;
-		});
-
+		// 네비게이션 기능 비활성화 (인라인 스크립트로 대체)
+		console.log('Navigation function disabled - using inline script instead');
 	};
 
 
 	var offcanvasMenu = function() {
-
-		$('body').prepend('<div id="gtco-offcanvas" />');
-		$('body').prepend('<a href="#" class="js-gtco-nav-toggle gtco-nav-toggle"><i></i></a>');
-		var clone1 = $('.menu-1 > ul').clone();
-		$('#gtco-offcanvas').append(clone1);
-		var clone2 = $('.menu-2 > ul').clone();
-		$('#gtco-offcanvas').append(clone2);
-
-		$('#gtco-offcanvas .has-dropdown').addClass('offcanvas-has-dropdown');
-		$('#gtco-offcanvas')
-			.find('li')
-			.removeClass('has-dropdown');
-
-		// Hover dropdown menu on mobile
-		$('.offcanvas-has-dropdown').mouseenter(function(){
-			var $this = $(this);
-
-			$this
-				.addClass('active')
-				.find('ul')
-				.slideDown(500, 'easeOutExpo');				
-		}).mouseleave(function(){
-
-			var $this = $(this);
-			$this
-				.removeClass('active')
-				.find('ul')
-				.slideUp(500, 'easeOutExpo');				
-		});
-
-
-		$(window).resize(function(){
-
-			if ( $('body').hasClass('offcanvas') ) {
-
-    			$('body').removeClass('offcanvas');
-    			$('.js-gtco-nav-toggle').removeClass('active');
-				
-	    	}
-		});
+		// 햄버거 버튼 및 오프캔버스 메뉴 비활성화
+		console.log('Offcanvas menu disabled for mobile optimization');
 	};
 
 
@@ -164,18 +128,10 @@
 
 	var burgerMenu = function() {
 
+		// 햄버거 버튼 클릭 이벤트 비활성화
 		$('body').on('click', '.js-gtco-nav-toggle', function(event){
-			var $this = $(this);
-
-
-			if ( $('body').hasClass('offcanvas') ) {
-				$('body').removeClass('offcanvas');
-			} else {
-				$('body').addClass('offcanvas');
-			}
-			$this.toggleClass('active');
 			event.preventDefault();
-
+			console.log('Hamburger button click disabled');
 		});
 	};
 
