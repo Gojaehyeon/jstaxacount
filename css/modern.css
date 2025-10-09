@@ -464,6 +464,27 @@ li {
   background: transparent !important;
 }
 
+/* Hide Daum Map Info */
+.root_daum_roughmap .map_info {
+  display: none !important;
+}
+
+.root_daum_roughmap .map_address {
+  display: none !important;
+}
+
+.root_daum_roughmap .map_tel {
+  display: none !important;
+}
+
+.root_daum_roughmap .section_address {
+  display: none !important;
+}
+
+.root_daum_roughmap .Is {
+  display: none !important;
+}
+
 /* Compact Contact Info */
 .contact-info-compact {
   display: flex;
