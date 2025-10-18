@@ -1291,7 +1291,7 @@ li {
 
 .parking-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-lg);
   margin-top: var(--spacing-lg);
 }
@@ -1308,7 +1308,8 @@ li {
 
 .parking-image {
   width: 100%;
-  height: auto;
+  height: 350px;
+  object-fit: cover;
   display: block;
 }
 
