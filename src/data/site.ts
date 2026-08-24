@@ -12,7 +12,9 @@ export const site = {
   fax: '02-2038-2018',
   email: 'admin@jsacc.co.kr',
   hours: '평일 09:00 – 18:00',
-  daumRoughmap: { timestamp: '1759999229053', key: 'aicbpn998ao' },
+  // 카카오 약도 위젯. cdn 은 https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js 안의 `var a="..."` 값이며
+  // uptime 워크플로가 매일 변경 여부를 점검합니다(변경 시 이슈 생성).
+  daumRoughmap: { timestamp: '1759999229053', key: 'aicbpn998ao', cdn: '207038f2_1774248312945' },
   stats: [
     { value: '1,200', suffix: '+', label: '누적 상담 건수' },
     { value: '20', suffix: '년+', label: '구성원 평균 경력' },

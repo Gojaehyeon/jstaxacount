@@ -70,12 +70,53 @@ const mapId = `daumRoughmapContainer${site.daumRoughmap.timestamp}`;
   </div>
 </section>
 
-<script is:inline charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-<script is:inline define:vars={{ ts: site.daumRoughmap.timestamp, key: site.daumRoughmap.key }}>
-  // 카카오(다음) 약도 위젯 — 위젯 설정은 src/data/site.ts 의 daumRoughmap 값을 수정하십시오.
-  window.addEventListener('load', function () {
-    if (window.daum && window.daum.roughmap) {
-      new window.daum.roughmap.Lander({ timestamp: ts, key: key, info: false }).render();
+<script is:inline define:vars={{ ts: site.daumRoughmap.timestamp, key: site.daumRoughmap.key, cdn: site.daumRoughmap.cdn, mapId }}>
+  // 카카오(다음) 약도 위젯 — 오시는 길 섹션이 화면에 가까워질 때만 로드합니다(초기 로딩 성능 보호).
+  // 공식 로더(roughmapLoader.js)는 document.write 를 사용해 지연 로드가 불가능하므로, 로더가 하는 일을 그대로 수행합니다.
+  // 위젯 설정은 src/data/site.ts 의 daumRoughmap 값을 수정하십시오.
+  (function () {
+    var target = document.getElementById(mapId);
+    if (!target) return;
+    var loaded = false;
+    function showFallback() {
+      target.innerHTML =
+        '<div style="display:grid;place-items:center;height:100%;padding:24px;text-align:center;color:#6b635b;font-size:.95rem;line-height:1.7">' +
+        '지도를 불러오지 못했습니다.<br><a href="https://map.kakao.com/link/search/' + encodeURIComponent('서울 강남구 논현로 616') +
+        '" target="_blank" rel="noopener" style="color:#4f1111;font-weight:600;text-decoration:underline">카카오맵에서 위치 보기</a></div>';
     }
-  });
+    function loadMap() {
+      if (loaded) return;
+      loaded = true;
+      window.daum = window.daum || {};
+      if (!window.daum.roughmap) {
+        window.daum.roughmap = {
+          phase: 'prod',
+          cdn: cdn,
+          URL_KEY_DATA_LOAD_PRE: 'https://t1.kakaocdn.net/roughmap/',
+          url_protocal: 'https:',
+          url_cdn_domain: '//t1.kakaocdn.net',
+        };
+      }
+      var s = document.createElement('script');
+      s.charset = 'UTF-8';
+      s.src = 'https://t1.kakaocdn.net/kakaomapweb/roughmap/place/prod/' + cdn + '/roughmapLander.js';
+      s.onload = function () {
+        try {
+          new window.daum.roughmap.Lander({ timestamp: ts, key: key, info: false }).render();
+        } catch (e) {
+          showFallback();
+        }
+      };
+      s.onerror = showFallback;
+      document.body.appendChild(s);
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); loadMap(); }
+      }, { rootMargin: '600px 0px' });
+      io.observe(target);
+    } else {
+      loadMap();
+    }
+  })();
 </script>
