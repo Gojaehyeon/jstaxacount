@@ -4,13 +4,13 @@ interface Props { invert?: boolean; class?: string }
 const { invert = false, class: cls = '' } = Astro.props;
 ---
 
-<dl class:list={['grid grid-cols-3 gap-6 sm:gap-10', cls]}>
+<dl class:list={['grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4', cls]}>
   {site.stats.map((s, i) => (
-    <div class="reveal" style={`--reveal-delay:${200 + i * 100}ms`}>
-      <dd class:list={['display text-[2rem] sm:text-[2.75rem]', invert ? 'text-white' : 'text-ink']}>
-        <span class="count" data-target={s.value}>{s.value}</span><span class="text-gold">{s.suffix}</span>
+    <div class="reveal text-center" style={`--reveal-delay:${i * 90}ms`}>
+      <dd class:list={['display text-[2.6rem] sm:text-[3.2rem]', invert ? 'text-white' : 'text-ink']}>
+        <span class="count" data-target={s.value}>{s.value}</span><span class="text-wine">{s.suffix}</span>
       </dd>
-      <dt class:list={['mt-1 text-[0.85rem] sm:text-[0.95rem]', invert ? 'text-white/60' : 'text-stone']}>{s.label}</dt>
+      <dt class:list={['mt-1 text-[0.88rem]', invert ? 'text-white/60' : 'text-stone']}>{s.label}</dt>
     </div>
   ))}
 </dl>

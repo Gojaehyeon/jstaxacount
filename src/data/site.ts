@@ -18,7 +18,8 @@ export const site = {
   stats: [
     { value: '1,200', suffix: '+', label: '누적 상담 건수' },
     { value: '20', suffix: '년+', label: '구성원 평균 경력' },
-    { value: '7', suffix: '인', label: '공인회계사·세무사' },
+    { value: '8', suffix: '인', label: '전문가 (자문역 포함)' },
+    { value: '5', suffix: '개', label: '전문 서비스 분야' },
   ],
   nav: [
     { href: '/', label: '홈' },

@@ -9,12 +9,12 @@ const notices = (await getCollection('notices')).sort(
 const fmt = (d: Date) => d.toISOString().slice(0, 10).replaceAll('-', '.');
 ---
 
-<Base headerTheme="dark" title="공지사항" description="주성회계법인의 공지사항과 세무·회계 소식을 확인하시기 바랍니다.">
-  <section class="bg-ink pt-40 pb-20 text-white md:pb-24">
+<Base title="공지사항" description="주성회계법인의 공지사항과 세무·회계 소식을 확인하시기 바랍니다.">
+  <section class="border-b border-line pt-36 pb-14 md:pb-20">
     <div class="container-x">
-      <p class="reveal eyebrow !text-gold-2">Notice</p>
-      <h1 class="reveal display mt-4 text-[2.4rem] sm:text-[3.4rem]" style="--reveal-delay:80ms">공지사항</h1>
-      <p class="reveal mt-5 text-white/70" style="--reveal-delay:160ms">주성회계법인의 공지사항과 세무·회계 소식을 안내드립니다.</p>
+      <p class="reveal eyebrow">Insight</p>
+      <h1 class="reveal display mt-3 text-[2.2rem] sm:text-[3rem]" style="--reveal-delay:80ms">공지사항<span class="text-wine">.</span></h1>
+      <p class="reveal mt-5 text-stone" style="--reveal-delay:160ms">주성회계법인의 공지사항과 세무·회계 소식을 안내드립니다.</p>
     </div>
   </section>
 
@@ -25,12 +25,12 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10).replaceAll('-', '.');
           <li class="reveal" style={`--reveal-delay:${Math.min(i, 6) * 50}ms`}>
             <a href={`/notice/${n.id}.html`} class="group grid gap-2 py-6 sm:grid-cols-[7rem_4rem_1fr] sm:items-start sm:gap-6">
               <span class="flex items-center gap-4 sm:contents">
-                <time datetime={n.data.date.toISOString()} class="font-serif text-[1.05rem] text-stone-2">{fmt(n.data.date)}</time>
-                <span class="w-14 rounded-full bg-paper-2 px-2 py-0.5 text-center text-[0.75rem] font-medium text-ink-2">{n.data.category}</span>
+                <time datetime={n.data.date.toISOString()} class="text-[0.95rem] font-medium text-stone-2">{fmt(n.data.date)}</time>
+                <span class="w-14 rounded-[3px] bg-paper-2 px-2 py-0.5 text-center text-[0.75rem] font-medium text-ink-2">{n.data.category}</span>
               </span>
               <div>
                 <h2 class="text-[1.15rem] font-semibold transition-colors group-hover:text-wine">
-                  {n.data.pinned && <span class="mr-2 rounded bg-wine px-1.5 py-0.5 align-middle text-[0.7rem] font-semibold text-white">중요</span>}
+                  {n.data.pinned && <span class="mr-2 rounded-[3px] bg-wine px-1.5 py-0.5 align-middle text-[0.7rem] font-semibold text-white">중요</span>}
                   {n.data.title}
                 </h2>
                 <p class="mt-1.5 text-[0.95rem] leading-7 text-stone">{n.data.summary}</p>

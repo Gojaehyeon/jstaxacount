@@ -4,15 +4,15 @@ interface Props { class?: string; compact?: boolean }
 const { class: cls = '', compact = false } = Astro.props;
 ---
 
-<a href="/" class:list={['group inline-flex items-center gap-3', cls]} aria-label="주성회계법인 홈">
+<a href="/" class:list={['group inline-flex items-center gap-2.5', cls]} aria-label="주성회계법인 홈">
   <span
-    class="grid size-10 shrink-0 place-items-center rounded-[6px] bg-wine text-[15px] font-bold tracking-[0.02em] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)] transition-transform duration-500 ease-out-expo group-hover:-translate-y-0.5"
+    class="grid size-9 shrink-0 place-items-center rounded-[4px] bg-brand text-[14px] font-bold tracking-[0.02em] text-white"
     aria-hidden="true">主成</span
   >
   <span class="flex flex-col leading-none">
-    <span class="text-[1.15rem] font-bold tracking-tightest">주성회계법인</span>
+    <span class="text-[1.05rem] font-bold tracking-tightest">주성회계법인</span>
     {!compact && (
-      <span class="mt-1 font-serif text-[0.7rem] italic tracking-[0.12em] uppercase opacity-70">Juseong Accounting Corp.</span>
+      <span class="mt-0.5 text-[0.62rem] font-semibold tracking-[0.14em] uppercase opacity-50">Juseong Accounting Firm</span>
     )}
   </span>
 </a>

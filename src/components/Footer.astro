@@ -4,37 +4,30 @@ import { site } from '../data/site';
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-ink text-white/80">
-  <div class="container-x grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
+<footer class="bg-dark text-white/70">
+  <div class="container-x grid gap-10 py-16 md:grid-cols-[1.5fr_1fr]">
     <div>
       <Logo class="text-white" />
-      <p class="mt-5 max-w-md text-[0.95rem] leading-7 text-white/60">
-        {site.description}
-      </p>
+      <div class="mt-6 space-y-1.5 text-[0.85rem] leading-6 text-white/50">
+        <p>주성회계법인 | 대표이사: 고득성</p>
+        <p>{site.address}</p>
+        <p>
+          Tel. <a class="hover:text-white" href={site.phoneHref}>{site.phone}</a> | Fax. {site.fax} |
+          <a class="hover:text-white" href={`mailto:${site.email}`}> {site.email}</a>
+        </p>
+        <p>{site.hours}</p>
+      </div>
     </div>
-    <div>
-      <h3 class="eyebrow mb-4">Contact</h3>
-      <ul class="space-y-2 text-[0.95rem] leading-7">
-        <li>{site.address}</li>
-        <li><a class="hover:text-gold" href={site.phoneHref}>대표번호 {site.phone}</a></li>
-        <li>팩스 {site.fax}</li>
-        <li><a class="hover:text-gold" href={`mailto:${site.email}`}>{site.email}</a></li>
-        <li class="text-white/50">{site.hours}</li>
-      </ul>
-    </div>
-    <div>
-      <h3 class="eyebrow mb-4">Menu</h3>
-      <ul class="space-y-2 text-[0.95rem] leading-7">
-        {site.nav.map((n) => (
-          <li><a class="hover:text-gold" href={n.href}>{n.label}</a></li>
-        ))}
-      </ul>
-    </div>
+    <nav class="flex flex-col items-start gap-2.5 text-[0.92rem] md:items-end" aria-label="푸터 메뉴">
+      {site.nav.filter((n) => n.href !== '/').map((n) => (
+        <a class="transition-colors hover:text-white" href={n.href}>{n.label}</a>
+      ))}
+    </nav>
   </div>
   <div class="border-t border-white/10">
-    <div class="container-x flex flex-col gap-2 py-6 text-[0.8rem] text-white/45 sm:flex-row sm:items-center sm:justify-between">
-      <p>&copy; {year} {site.name} (Juseong Accounting Corporation). All rights reserved.</p>
-      <p>Designed by <a class="hover:text-gold" href="http://www.gojaehyun.com" target="_blank" rel="noopener">STUDIO WITHY</a></p>
+    <div class="container-x flex flex-col gap-2 py-6 text-[0.78rem] text-white/40 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; {year} Juseong Accounting Corporation. All rights reserved.</p>
+      <p>Designed by <a class="hover:text-white" href="http://www.gojaehyun.com" target="_blank" rel="noopener">STUDIO WITHY</a></p>
     </div>
   </div>
 </footer>

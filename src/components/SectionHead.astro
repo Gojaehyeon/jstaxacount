@@ -6,12 +6,14 @@ interface Props {
   align?: 'left' | 'center';
   class?: string;
   invert?: boolean;
+  /** 제목 끝에 포인트 마침표 */
+  dot?: boolean;
 }
-const { eyebrow, title, lead, align = 'left', class: cls = '', invert = false } = Astro.props;
+const { eyebrow, title, lead, align = 'left', class: cls = '', invert = false, dot = true } = Astro.props;
 ---
 
-<div class:list={['reveal max-w-2xl', align === 'center' && 'mx-auto text-center', cls]}>
-  {eyebrow && <p class="eyebrow mb-4">{eyebrow}</p>}
-  <h2 class:list={['display text-[2rem] sm:text-[2.6rem]', invert ? 'text-white' : 'text-ink']} set:html={title} />
-  {lead && <p class:list={['mt-5 text-[1.05rem] leading-8', invert ? 'text-white/65' : 'text-stone']} set:html={lead} />}
+<div class:list={['reveal max-w-3xl', align === 'center' && 'mx-auto text-center', cls]}>
+  {eyebrow && <p class="eyebrow mb-3">{eyebrow}</p>}
+  <h2 class:list={['display text-[1.9rem] sm:text-[2.4rem]', dot && 'dot', invert ? 'text-white' : 'text-ink']} set:html={title} />
+  {lead && <p class:list={['mt-4 text-[1rem] leading-7', invert ? 'text-white/60' : 'text-stone']} set:html={lead} />}
 </div>

@@ -10,17 +10,17 @@ const mapId = `daumRoughmapContainer${site.daumRoughmap.timestamp}`;
 
 <section id="contact" class="scroll-mt-20 bg-paper-2 py-20 md:py-28">
   <div class="container-x">
-    <SectionHead eyebrow="Location" title="오시는 길" lead="강남구 논현로 616, 4층. 방문 전 전화로 예약하시면 대기 없이 상담이 가능합니다." />
+    <SectionHead eyebrow="Location" title="Location" lead="강남구 논현로 616, 4층. 방문 전 전화로 예약하시면 대기 없이 상담이 가능합니다." />
 
     <div class="mt-12 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-      <div class="reveal map-frame relative overflow-hidden rounded-2xl bg-white ring-1 ring-line">
+      <div class="reveal map-frame relative overflow-hidden rounded-[4px] bg-white ring-1 ring-line">
         <div id={mapId} class="root_daum_roughmap root_daum_roughmap_landing" style="width:100%;height:100%"></div>
         <noscript>
           <div class="absolute inset-0 grid place-items-center p-6 text-center text-stone">지도를 보려면 자바스크립트를 활성화하시기 바랍니다.</div>
         </noscript>
       </div>
 
-      <div class="reveal flex flex-col justify-between rounded-2xl bg-ink p-7 text-white sm:p-8" style="--reveal-delay:120ms">
+      <div class="reveal flex flex-col justify-between rounded-[4px] bg-dark p-7 text-white sm:p-8" style="--reveal-delay:120ms">
         <dl class="space-y-5">
           {[
             ['주소', site.address, undefined],
@@ -30,7 +30,7 @@ const mapId = `daumRoughmapContainer${site.daumRoughmap.timestamp}`;
             ['업무시간', site.hours, undefined],
           ].map(([k, v, href]) => (
             <div>
-              <dt class="font-serif text-[0.8rem] italic tracking-[0.16em] uppercase text-gold-2">{k}</dt>
+              <dt class="text-[0.72rem] font-bold tracking-[0.14em] uppercase text-wine-3">{k}</dt>
               <dd class="mt-1 text-[1.05rem] leading-7">{href ? <a class="hover:text-gold" href={href}>{v}</a> : v}</dd>
             </div>
           ))}
@@ -39,7 +39,7 @@ const mapId = `daumRoughmapContainer${site.daumRoughmap.timestamp}`;
           href={`https://map.kakao.com/link/search/${encodeURIComponent(site.address)}`}
           target="_blank"
           rel="noopener"
-          class="mt-8 inline-flex items-center gap-2 text-[0.9rem] font-semibold text-gold-2 hover:text-gold"
+          class="mt-8 inline-flex items-center gap-2 text-[0.9rem] font-semibold text-white/80 hover:text-white"
         >
           카카오맵에서 길찾기
           <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
@@ -56,7 +56,7 @@ const mapId = `daumRoughmapContainer${site.daumRoughmap.timestamp}`;
       </div>
       <ul class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {parking.map((p, i) => (
-          <li class="reveal overflow-hidden rounded-2xl bg-white ring-1 ring-line" style={`--reveal-delay:${i * 80}ms`}>
+          <li class="reveal overflow-hidden rounded-[4px] bg-white ring-1 ring-line" style={`--reveal-delay:${i * 80}ms`}>
             <Image src={img(p.image)} alt={`${p.name} 약도`} width={480} height={360} class="aspect-[4/3] w-full object-cover" loading="lazy" />
             <div class="p-5">
               <p class="font-semibold">{p.name}</p>

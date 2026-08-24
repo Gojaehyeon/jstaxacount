@@ -30,8 +30,8 @@ const jsonLd = {
       </a>
       <header class="mt-8 border-b border-line pb-8">
         <div class="flex items-center gap-3 text-[0.85rem]">
-          <span class="rounded-full bg-paper-2 px-2.5 py-0.5 font-medium text-ink-2">{notice.data.category}</span>
-          <time datetime={notice.data.date.toISOString()} class="font-serif text-[1rem] text-stone-2">{fmt(notice.data.date)}</time>
+          <span class="rounded-[3px] bg-paper-2 px-2.5 py-0.5 font-medium text-ink-2">{notice.data.category}</span>
+          <time datetime={notice.data.date.toISOString()} class="text-[0.9rem] font-medium text-stone-2">{fmt(notice.data.date)}</time>
         </div>
         <h1 class="display mt-4 text-[1.9rem] sm:text-[2.5rem]">{notice.data.title}</h1>
         <p class="mt-4 leading-7 text-stone">{notice.data.summary}</p>

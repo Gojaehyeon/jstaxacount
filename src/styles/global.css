@@ -2,21 +2,25 @@
 
 @theme {
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  --font-serif: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
+  --font-serif: var(--font-sans);
 
-  --color-ink: #16120f;
-  --color-ink-2: #2a2420;
-  --color-stone: #6b635b;
-  --color-stone-2: #9a918a;
-  --color-line: #e5dfd6;
-  --color-paper: #f7f4ef;
-  --color-paper-2: #efeae2;
+  /* 마일스톤 스타일 미니멀 팔레트: 흰 바탕 + 포인트 컬러 하나 */
+  --color-ink: #111111;
+  --color-ink-2: #333333;
+  --color-stone: #6f6f6f;
+  --color-stone-2: #9a9a9a;
+  --color-line: #e5e5e5;
+  --color-paper: #ffffff;
+  --color-paper-2: #f7f7f8;
   --color-white: #ffffff;
-  --color-wine: #4f1111;
-  --color-wine-2: #6e1d1d;
-  --color-wine-3: #8f3434;
-  --color-gold: #b9975b;
-  --color-gold-2: #d9c39a;
+  --color-dark: #141414;
+  /* 브랜드(로고 마크) 버건디 · 포인트 크림슨 */
+  --color-brand: #4f1111;
+  --color-wine: #b01e28;
+  --color-wine-2: #8f161e;
+  --color-wine-3: #c9333d;
+  --color-gold: #b01e28;
+  --color-gold-2: #e4626b;
 
   --tracking-tightest: -0.04em;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -38,7 +42,7 @@
     color: var(--color-white);
   }
   :focus-visible {
-    outline: 2px solid var(--color-gold);
+    outline: 2px solid var(--color-wine);
     outline-offset: 3px;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -48,29 +52,35 @@
 }
 
 @utility container-x {
-  @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8;
+  @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8;
 }
 
+/* 섹션 라벨: Difference / Services 처럼 크고 굵은 제목 위 소형 라벨이 필요할 때 */
 @utility eyebrow {
-  @apply font-serif text-[0.95rem] italic tracking-[0.18em] uppercase text-gold;
+  @apply text-[0.8rem] font-bold tracking-[0.14em] uppercase text-wine;
 }
 
 @utility display {
-  @apply font-sans font-semibold tracking-tightest leading-[1.12];
+  @apply font-sans font-bold tracking-tightest leading-[1.15];
+}
+
+/* 제목 끝 포인트 마침표 */
+@utility dot {
+  &::after { content: '.'; color: var(--color-wine); }
 }
 
 @utility prose-note {
   & p { @apply mb-4 leading-8 text-ink-2; }
-  & h2 { @apply mt-8 mb-3 text-xl font-semibold; }
+  & h2 { @apply mt-8 mb-3 text-xl font-bold; }
   & ul { @apply mb-4 list-disc pl-5 leading-8 text-ink-2; }
   & strong { @apply font-semibold text-ink; }
 }
 
 /* 문의 폼 입력 필드 */
 @utility field {
-  @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-[0.95rem] font-normal text-ink outline-none transition-colors placeholder:text-stone-2 focus:border-wine;
+  @apply w-full rounded-[4px] border border-line bg-white px-4 py-3 text-[0.95rem] font-normal text-ink outline-none transition-colors placeholder:text-stone-2 focus:border-ink;
 }
-.field:user-invalid { border-color: #b23a3a; }
+.field:user-invalid { border-color: #b01e28; }
 
 /* 스크롤 진입 애니메이션 */
 .reveal {
@@ -85,17 +95,19 @@
 }
 
 /* 헤더 스크롤 상태 */
-.site-header { transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, backdrop-filter 0.35s ease; }
+.site-header { transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, backdrop-filter 0.3s ease; }
 .site-header[data-solid="true"] {
-  background-color: rgba(247, 244, 239, 0.86);
-  backdrop-filter: saturate(160%) blur(14px);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
   border-bottom-color: var(--color-line);
+  color: var(--color-ink);
 }
 .site-header[data-theme="dark"][data-solid="false"] { color: var(--color-white); }
 
-/* 얇은 골드 구분선 */
-.hairline { height: 1px; background: linear-gradient(90deg, transparent, var(--color-gold-2), transparent); }
+/* 다크 밴드 가로 스크롤 (스크롤바 숨김) */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 /* 카카오 약도 위젯 강제 스타일 */
 .map-frame { height: 400px; }

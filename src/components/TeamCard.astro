@@ -8,10 +8,10 @@ const m = member.data;
 
 <article
   id={`member-${member.id}`}
-  class="reveal group scroll-mt-28 overflow-hidden rounded-2xl bg-white ring-1 ring-line"
+  class="reveal group scroll-mt-28 overflow-hidden rounded-[4px] bg-white border border-line"
   style={`--reveal-delay:${(index % 4) * 70}ms`}
 >
-  <div class="relative aspect-[4/4.4] overflow-hidden bg-gradient-to-b from-paper-2 to-[#ddd5c9]">
+  <div class="relative aspect-[4/4.4] overflow-hidden bg-[#e9e9ea]">
     <Image
       src={m.photo}
       alt={`${m.title} ${m.name}`}
@@ -22,9 +22,9 @@ const m = member.data;
     />
     <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/55 to-transparent"></div>
     <div class="absolute inset-x-0 bottom-0 p-5 text-white">
-      <p class="font-serif text-[0.8rem] italic tracking-[0.16em] uppercase text-gold-2">{m.role}</p>
+      <p class="text-[0.72rem] font-bold tracking-[0.14em] uppercase text-wine-3">{m.role}</p>
       <h3 class="mt-1 text-[1.4rem] font-bold tracking-tightest">{m.name} <span class="ml-1 text-[0.9rem] font-medium opacity-80">{m.title}</span></h3>
-      {m.affiliation && <p class="mt-1 text-[0.8rem] text-gold-2">{m.affiliation}</p>}
+      {m.affiliation && <p class="mt-1 text-[0.8rem] text-white/70">{m.affiliation}</p>}
     </div>
   </div>
 

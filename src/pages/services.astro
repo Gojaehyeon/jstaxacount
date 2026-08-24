@@ -8,17 +8,17 @@ import UsTaxPartner from '../components/UsTaxPartner.astro';
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Base headerTheme="dark" title="주요업무" description="주성회계법인의 주요 업무: 회계감사, 세무자문, 프라이빗 웰쓰(상속·증여 플래닝), 미국 세무자문, 재무자문(M&A·기업가치평가).">
-  <section class="bg-ink pt-40 pb-20 text-white md:pb-28">
+<Base title="주요업무" description="주성회계법인의 주요 업무: 회계감사, 세무자문, 프라이빗 웰쓰(상속·증여 플래닝), 미국 세무자문, 재무자문(M&A·기업가치평가).">
+  <section class="border-b border-line pt-36 pb-14 md:pb-20">
     <div class="container-x">
-      <p class="reveal eyebrow !text-gold-2">Services</p>
-      <h1 class="reveal display mt-4 max-w-3xl text-[2.4rem] sm:text-[3.4rem]" style="--reveal-delay:80ms">주요 업무</h1>
-      <p class="reveal mt-6 max-w-2xl text-[1.05rem] leading-8 text-white/70" style="--reveal-delay:160ms">
+      <p class="reveal eyebrow">Services</p>
+      <h1 class="reveal display mt-3 text-[2.2rem] sm:text-[3rem]" style="--reveal-delay:80ms">주요 업무<span class="text-wine">.</span></h1>
+      <p class="reveal mt-5 max-w-2xl text-[1rem] leading-7 text-stone" style="--reveal-delay:160ms">
         회계와 세무자문, FAS 서비스를 기본으로 금융, 투자, 부동산, 상속, 비영리재단·공익법인 서비스를 통합하여 고객 솔루션을 제공합니다.
       </p>
-      <nav class="reveal mt-10 flex flex-wrap gap-2" aria-label="업무 바로가기" style="--reveal-delay:240ms">
+      <nav class="reveal mt-8 flex flex-wrap gap-2" aria-label="업무 바로가기" style="--reveal-delay:240ms">
         {services.map((s) => (
-          <a href={`#${s.id}`} class="rounded-full border border-white/20 px-4 py-2 text-[0.9rem] transition-colors hover:border-gold hover:text-gold">{s.data.title}</a>
+          <a href={`#${s.id}`} class="rounded-full border border-line px-4 py-2 text-[0.88rem] font-medium transition-colors hover:border-ink">{s.data.title}</a>
         ))}
       </nav>
     </div>
@@ -26,24 +26,24 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 
   <div class="divide-y divide-line">
     {services.map((s, i) => (
-      <section id={s.id} class:list={['scroll-mt-20 py-20 md:py-28', i % 2 === 1 && 'bg-white']}>
+      <section id={s.id} class:list={['scroll-mt-16 py-20 md:py-28', i % 2 === 1 && 'bg-paper-2']}>
         <div class="container-x grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div class:list={['self-start lg:sticky lg:top-28', i % 2 === 1 && 'lg:order-2']}>
             <p class="reveal eyebrow">{s.data.eyebrow}</p>
-            <h2 class="reveal display mt-3 text-[2rem] sm:text-[2.5rem]" style="--reveal-delay:60ms">{s.data.title}</h2>
-            <p class="reveal mt-1 font-serif text-[1.1rem] italic text-stone-2" style="--reveal-delay:90ms">{s.data.subtitle}</p>
+            <h2 class="reveal display dot mt-3 text-[2rem] sm:text-[2.5rem]" style="--reveal-delay:60ms">{s.data.title}</h2>
+            <p class="reveal mt-2 text-[0.85rem] font-semibold tracking-[0.08em] uppercase text-stone-2" style="--reveal-delay:90ms">{s.data.subtitle}</p>
             <p class="reveal mt-6 text-[1.05rem] leading-8 text-ink-2" style="--reveal-delay:120ms">{s.data.description}</p>
-            <div class="reveal mt-8 overflow-hidden rounded-2xl ring-1 ring-line" style="--reveal-delay:180ms">
+            <div class="reveal mt-8 overflow-hidden rounded-[4px]" style="--reveal-delay:180ms">
               <Image src={s.data.image} alt={s.data.title} width={960} height={600} class="aspect-[16/10] w-full object-cover" loading={i === 0 ? 'eager' : 'lazy'} />
             </div>
           </div>
           <div class="grid gap-5 self-start">
             {s.data.groups.map((g, gi) => (
-              <div class="reveal rounded-2xl bg-paper p-6 ring-1 ring-line sm:p-7" style={`--reveal-delay:${gi * 80}ms`}>
-                <h3 class="text-[1.1rem] font-semibold">{g.heading}</h3>
+              <div class="reveal rounded-[4px] border border-line bg-white p-6 sm:p-7" style={`--reveal-delay:${gi * 80}ms`}>
+                <h3 class="dot text-[1.1rem] font-bold">{g.heading}</h3>
                 <ul class="mt-4 grid gap-2.5 text-[0.95rem] leading-6 text-ink-2">
                   {g.items.map((item) => (
-                    <li class="flex gap-3"><span class="mt-[0.75em] size-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true"></span>{item}</li>
+                    <li class="flex gap-3"><span class="mt-[0.75em] size-1.5 shrink-0 rounded-full bg-wine" aria-hidden="true"></span>{item}</li>
                   ))}
                 </ul>
               </div>

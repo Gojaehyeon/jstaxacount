@@ -17,19 +17,19 @@ const reasons = [
 ];
 ---
 
-<Base headerTheme="dark" title="법인소개" description="주성회계법인 소개. 대형회계법인·금융회사·대기업 실무경험을 갖춘 공인회계사, 세무사, M&A 전문가가 고객에게 적합한 솔루션을 제공합니다.">
-  <section class="bg-ink pt-40 pb-20 text-white md:pb-28">
+<Base title="법인소개" description="주성회계법인 소개. 대형회계법인·금융회사·대기업 실무경험을 갖춘 공인회계사, 세무사, M&A 전문가가 고객에게 적합한 솔루션을 제공합니다.">
+  <section class="border-b border-line pt-36 pb-14 md:pb-20">
     <div class="container-x">
-      <p class="reveal eyebrow !text-gold-2">About Us</p>
-      <h1 class="reveal display mt-4 max-w-3xl text-[2.4rem] sm:text-[3.4rem]" style="--reveal-delay:80ms">
-        올바른 재무적 의사결정을<br />돕는 것이 우리의 사명입니다
+      <p class="reveal eyebrow">About</p>
+      <h1 class="reveal display mt-3 max-w-3xl text-[2.2rem] sm:text-[3rem]" style="--reveal-delay:80ms">
+        올바른 재무적 의사결정을 돕는 것,<br />우리의 사명입니다<span class="text-wine">.</span>
       </h1>
     </div>
   </section>
 
   <section class="py-20 md:py-28">
     <div class="container-x grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-      <div class="reveal relative overflow-hidden rounded-3xl bg-gradient-to-b from-paper-2 to-[#ddd5c9] ring-1 ring-line">
+      <div class="reveal relative overflow-hidden rounded-[4px] bg-[#e9e9ea]">
         <Image src={ceoPhoto} alt="대표이사 공인회계사 고득성" width={800} height={800} class="aspect-square w-full object-cover object-top" loading="eager" />
       </div>
       <div class="self-center">
@@ -41,19 +41,19 @@ const reasons = [
         <p class="reveal mt-4 text-[1.05rem] leading-8 text-ink-2" style="--reveal-delay:180ms">
           대형회계법인, 금융회사, 대기업에서 실무경험을 축적한 공인회계사, 세무사, 경영컨설팅, M&amp;A 전문가를 중심으로 고객에게 적합한 서비스를 제공하고, 각 구성원이 쌓아온 특별한 노하우와 실전경험을 바탕으로 고객의 필요를 충족하는 최고의 솔루션을 제공하겠습니다.
         </p>
-        <Stats class="mt-10 max-w-lg" />
+        
       </div>
     </div>
   </section>
 
-  <section class="bg-white py-20 md:py-28">
+  <section class="py-20 md:py-28">
     <div class="container-x">
-      <SectionHead eyebrow="Why Juseong" title="왜 주성회계법인인가" align="center" />
+      <SectionHead eyebrow="Why Juseong" title="Difference" dot={false} align="center" />
       <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {reasons.map(([t, d], i) => (
-          <li class="reveal rounded-2xl bg-paper p-7 ring-1 ring-line" style={`--reveal-delay:${i * 80}ms`}>
-            <span class="font-serif text-[2rem] leading-none text-gold">0{i + 1}</span>
-            <h3 class="mt-5 text-[1.15rem] font-semibold">{t}</h3>
+          <li class="reveal rounded-[4px] bg-paper-2 p-7" style={`--reveal-delay:${i * 80}ms`}>
+            <span class="text-[0.95rem] font-bold text-wine">0{i + 1}</span>
+            <h3 class="mt-4 text-[1.15rem] font-bold">{t}</h3>
             <p class="mt-2 text-[0.95rem] leading-7 text-stone">{d}</p>
           </li>
         ))}
@@ -61,9 +61,9 @@ const reasons = [
     </div>
   </section>
 
-  <section id="team" class="scroll-mt-20 py-20 md:py-28">
+  <section id="team" class="scroll-mt-16 bg-paper-2 py-20 md:py-28">
     <div class="container-x">
-      <SectionHead eyebrow="Our People" title="구성원 소개" lead="20년 이상의 경력을 쌓은 전문가들로 이뤄진 주성회계법인의 구성원을 소개합니다." />
+      <SectionHead eyebrow="Our People" title="People" dot={false} lead="20년 이상의 경력을 쌓은 전문가들로 이뤄진 주성회계법인의 구성원을 소개합니다." />
       <div class="mt-12 grid gap-6 md:grid-cols-2">
         {team.map((m, i) => <TeamCard member={m} index={i} detailed />)}
       </div>
