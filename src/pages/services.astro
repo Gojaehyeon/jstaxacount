@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import CTA from '../components/CTA.astro';
+import UsTaxPartner from '../components/UsTaxPartner.astro';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -49,6 +50,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
             ))}
           </div>
         </div>
+        {s.id === 'us-tax' && <div class="container-x mt-10"><UsTaxPartner /></div>}
       </section>
     ))}
   </div>

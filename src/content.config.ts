@@ -20,7 +20,9 @@ const team = defineCollection({
     z.object({
       name: z.string(),
       title: z.string(),
-      role: z.enum(['대표파트너', '파트너', '이사', '공인회계사']),
+      role: z.enum(['대표파트너', '파트너', '이사', '공인회계사', '자문역']),
+      /** 외부 자문역의 소속 (예: ALL ABOUT TAX LLC 대표) */
+      affiliation: z.string().optional(),
       photo: image(),
       featured: z.boolean().default(false),
       order: z.number(),

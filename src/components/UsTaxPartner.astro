@@ -1,0 +1,75 @@
+---
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { usTaxPartner as p } from '../data/ustax-partner';
+const member = await getEntry('team', p.memberId);
+if (!member) throw new Error(`team member "${p.memberId}" not found`);
+const m = member.data;
+---
+
+<details class="reveal group rounded-2xl bg-white ring-1 ring-line open:ring-gold/60" id="us-tax-partner">
+  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-6 sm:p-7 [&::-webkit-details-marker]:hidden">
+    <div>
+      <p class="eyebrow">Advisory Partner</p>
+      <h3 class="mt-1.5 text-[1.15rem] font-semibold">{m.name} 자문역 · {p.firm} 소개 자료</h3>
+      <p class="mt-1 text-[0.9rem] text-stone">미국 세무 협업 파트너의 상세 서비스와 약력을 확인하실 수 있습니다.</p>
+    </div>
+    <span class="grid size-10 shrink-0 place-items-center rounded-full border border-line text-wine transition-transform duration-300 group-open:rotate-45" aria-hidden="true">
+      <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+    </span>
+  </summary>
+
+  <div class="border-t border-line p-6 sm:p-7">
+    <div class="grid gap-6 sm:grid-cols-[200px_1fr] lg:grid-cols-[240px_1fr]">
+      <div class="self-start overflow-hidden rounded-xl bg-paper-2">
+        <Image src={m.photo} alt={`${m.title} ${m.name}`} width={320} height={420} class="aspect-[3/4] w-full object-cover object-top" loading="lazy" />
+      </div>
+      <div>
+        <h4 class="text-[1.3rem] font-bold tracking-tightest">{m.name} <span class="text-[0.9rem] font-medium text-stone">{m.title}</span></h4>
+        <p class="mt-1 text-[0.9rem] text-wine">{m.affiliation}</p>
+        <p class="mt-4 text-[0.95rem] leading-7 text-ink-2">
+          미국 공인회계사(US CPA)·세무사(EA) 및 한국 공인노무사로서 미국 세무신고, 해외조세 컴플라이언스, 증여·상속세 플래닝, 세무 리스크 검토와 절세전략 시뮬레이션 등 미국 세무 분야에서 풍부한 경험을 갖추고 있습니다. 푸르덴셜생명보험(전무), 에이스손해보험(상무), 한화종합금융에서 경영 전반과 전략 수립을 담당하여 한국 법인의 미국 현지 설립·운영에 대한 절차적 지원과 성장 자문을 함께 제공합니다.
+        </p>
+        <div class="mt-5 grid gap-5 sm:grid-cols-2">
+          <div>
+            <h5 class="mb-2 text-[0.78rem] font-semibold tracking-[0.12em] text-stone-2 uppercase">주요 약력</h5>
+            <ul class="space-y-1 text-[0.9rem] leading-6 text-ink-2">{m.career.map((c) => <li class="flex gap-2"><span class="mt-[0.7em] size-1 shrink-0 rounded-full bg-gold" aria-hidden="true"></span>{c}</li>)}</ul>
+          </div>
+          <div>
+            <h5 class="mb-2 text-[0.78rem] font-semibold tracking-[0.12em] text-stone-2 uppercase">전문 분야</h5>
+            <ul class="space-y-1 text-[0.9rem] leading-6 text-ink-2">{m.expertise.map((c) => <li class="flex gap-2"><span class="mt-[0.7em] size-1 shrink-0 rounded-full bg-wine-3" aria-hidden="true"></span>{c}</li>)}</ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 rounded-2xl bg-paper p-6">
+      <p class="eyebrow">{p.firm}</p>
+      <p class="mt-2 font-semibold">{p.tagline}</p>
+      <p class="mt-3 text-[0.92rem] leading-7 text-stone">{p.intro}</p>
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {p.network.map((n) => <li class="rounded-full bg-white px-3 py-1 text-[0.8rem] font-medium text-ink-2 ring-1 ring-line">{n}</li>)}
+      </ul>
+    </div>
+
+    <ol class="mt-6 grid gap-4 md:grid-cols-2">
+      {p.solutions.map((s, i) => (
+        <li class="rounded-2xl p-6 ring-1 ring-line">
+          <div class="flex items-center justify-between">
+            <span class="font-serif text-[1.6rem] leading-none text-gold">0{i + 1}</span>
+            <span class="font-serif text-[0.75rem] italic tracking-[0.16em] uppercase text-stone-2">{s.tag}</span>
+          </div>
+          <h4 class="mt-3 font-semibold">{s.title}</h4>
+          <ul class="mt-3 space-y-1.5 text-[0.9rem] leading-6 text-ink-2">
+            {s.items.map((it) => <li class="flex gap-2"><span class="mt-[0.7em] size-1 shrink-0 rounded-full bg-gold" aria-hidden="true"></span>{it}</li>)}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</details>
+
+<script>
+  // 해시(#us-tax-partner)로 진입하면 자동으로 펼칩니다.
+  if (location.hash === '#us-tax-partner') document.getElementById('us-tax-partner')?.setAttribute('open', '');
+</script>

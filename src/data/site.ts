@@ -25,8 +25,20 @@ export const site = {
     { href: '/about.html', label: '법인소개' },
     { href: '/services.html', label: '주요업무' },
     { href: '/notice.html', label: '공지사항' },
+    { href: '/#inquiry', label: '상담 문의' },
     { href: '/#contact', label: '오시는 길' },
   ],
+  /**
+   * 온라인 문의 폼 전송 설정 (Web3Forms, https://web3forms.com — 무료, 월 250건).
+   * accessKey 발급: web3forms.com 에서 수신 이메일(admin@jsacc.co.kr)을 입력하면 키가 메일로 옵니다.
+   * 키가 비어 있으면 폼은 메일 앱(mailto)으로 대체 전송됩니다.
+   */
+  inquiry: {
+    endpoint: 'https://api.web3forms.com/submit',
+    accessKey: '',
+    to: 'admin@jsacc.co.kr',
+    topics: ['회계감사', '세무자문', '프라이빗 웰쓰(상속·증여)', '미국 세무자문', '재무자문(M&A·가치평가)', '기타'],
+  },
 } as const;
 
 export const parking = [

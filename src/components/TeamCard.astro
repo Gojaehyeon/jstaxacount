@@ -24,6 +24,7 @@ const m = member.data;
     <div class="absolute inset-x-0 bottom-0 p-5 text-white">
       <p class="font-serif text-[0.8rem] italic tracking-[0.16em] uppercase text-gold-2">{m.role}</p>
       <h3 class="mt-1 text-[1.4rem] font-bold tracking-tightest">{m.name} <span class="ml-1 text-[0.9rem] font-medium opacity-80">{m.title}</span></h3>
+      {m.affiliation && <p class="mt-1 text-[0.8rem] text-gold-2">{m.affiliation}</p>}
     </div>
   </div>
 

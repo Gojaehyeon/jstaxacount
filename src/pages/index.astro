@@ -9,6 +9,7 @@ import TeamCard from '../components/TeamCard.astro';
 import Stats from '../components/Stats.astro';
 import Contact from '../components/Contact.astro';
 import CTA from '../components/CTA.astro';
+import Inquiry from '../components/Inquiry.astro';
 import hero from '../assets/hero.jpg';
 import { site } from '../data/site';
 
@@ -55,7 +56,7 @@ const privateItems = [
         고객 한 분만을 위한 프라이빗 회계·세무 서비스. 사업의 시작부터 기업의 정점, 그리고 다음 세대로의 승계까지 함께합니다.
       </p>
       <div class="reveal mt-10 flex flex-col gap-3 sm:flex-row" style="--reveal-delay:240ms">
-        <Button href={site.phoneHref} variant="gold" size="lg">상담 문의 {site.phone}</Button>
+        <Button href="/#inquiry" variant="gold" size="lg">상담 문의하기</Button>
         <Button href="/services.html" variant="ghost-dark" size="lg">주요 업무 보기</Button>
       </div>
       <div class="mt-16 border-t border-white/15 pt-10">
@@ -129,13 +130,13 @@ const privateItems = [
         </div>
       </div>
 
-      <div class="mt-6 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-6">
+      <div class="mt-6 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
         {partners.map((m, i) => (
           <a href={`/about.html#member-${m.id}`} class="reveal group" style={`--reveal-delay:${i * 60}ms`}>
             <div class="relative aspect-[4/4.6] overflow-hidden rounded-2xl bg-gradient-to-b from-paper-2 to-[#ddd5c9] ring-1 ring-line">
               <Image src={m.data.photo} alt={`${m.data.title} ${m.data.name}`} width={400} height={460} class="size-full object-cover object-top transition-transform duration-700 ease-out-expo group-hover:scale-[1.04]" loading="lazy" />
             </div>
-            <p class="mt-3 font-semibold">{m.data.name}</p>
+            <p class="mt-3 font-semibold">{m.data.name}{m.data.role === '자문역' && <span class="ml-1.5 rounded bg-gold/15 px-1.5 py-0.5 align-middle text-[0.7rem] font-medium text-gold">자문</span>}</p>
             <p class="text-[0.8rem] text-stone">{m.data.title}</p>
           </a>
         ))}
@@ -166,6 +167,7 @@ const privateItems = [
     </div>
   </section>
 
+  <Inquiry />
   <Contact />
   <CTA />
 </Base>

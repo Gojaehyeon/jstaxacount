@@ -66,6 +66,12 @@
   & strong { @apply font-semibold text-ink; }
 }
 
+/* 문의 폼 입력 필드 */
+@utility field {
+  @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-[0.95rem] font-normal text-ink outline-none transition-colors placeholder:text-stone-2 focus:border-wine;
+}
+.field:user-invalid { border-color: #b23a3a; }
+
 /* 스크롤 진입 애니메이션 */
 .reveal {
   opacity: 0;

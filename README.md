@@ -43,6 +43,16 @@ npm run preview    # 빌드 결과 미리보기
 | 주소·전화·이메일·업무시간 | `src/data/site.ts` |
 | 주차장 안내 | `src/data/site.ts`의 `parking` + `src/assets/parking/` |
 | 색상·폰트 | `src/styles/global.css`의 `@theme` |
+| 미국 세무 자문 파트너 자료 | `src/data/ustax-partner.ts` (services.html US TAX 하단 펼침 패널) |
+| 문의 폼 수신 설정 | `src/data/site.ts`의 `inquiry.accessKey` (아래 참고) |
+
+## 온라인 문의 폼
+
+홈 `#inquiry` 섹션의 폼은 [Web3Forms](https://web3forms.com)(무료, 월 250건)로 이메일 전송됩니다.
+
+1. web3forms.com 에서 수신 이메일 `admin@jsacc.co.kr` 입력 → 메일로 받은 Access Key 복사
+2. `src/data/site.ts` → `inquiry.accessKey`에 붙여넣고 main push
+3. 키가 비어 있는 동안에는 방문자의 메일 앱이 열리는 방식(mailto)으로 동작합니다.
 
 수정 후 `git push origin main` 하면 약 1–2분 뒤 https://jsacc.co.kr 에 반영됩니다.
 
