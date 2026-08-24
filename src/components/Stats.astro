@@ -1,0 +1,39 @@
+---
+import { site } from '../data/site';
+interface Props { invert?: boolean; class?: string }
+const { invert = false, class: cls = '' } = Astro.props;
+---
+
+<dl class:list={['grid grid-cols-3 gap-6 sm:gap-10', cls]}>
+  {site.stats.map((s, i) => (
+    <div class="reveal" style={`--reveal-delay:${200 + i * 100}ms`}>
+      <dd class:list={['display text-[2rem] sm:text-[2.75rem]', invert ? 'text-white' : 'text-ink']}>
+        <span class="count" data-target={s.value}>{s.value}</span><span class="text-gold">{s.suffix}</span>
+      </dd>
+      <dt class:list={['mt-1 text-[0.85rem] sm:text-[0.95rem]', invert ? 'text-white/60' : 'text-stone']}>{s.label}</dt>
+    </div>
+  ))}
+</dl>
+
+<script>
+  // 숫자 카운트업 (모션 축소 설정 시 비활성)
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('.count').forEach((el) => {
+    const target = Number(el.dataset.target!.replace(/,/g, ''));
+    if (reduce || Number.isNaN(target)) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const dur = 1400;
+      const tick = (t: number) => {
+        const p = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 4);
+        el.textContent = Math.round(target * eased).toLocaleString('ko-KR');
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.5 });
+    io.observe(el);
+  });
+</script>

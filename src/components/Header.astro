@@ -1,0 +1,102 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+interface Props { theme?: 'light' | 'dark' }
+const { theme = 'light' } = Astro.props;
+const path = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') return path === '/' || path === '/index.html';
+  const base = href.split('#')[0];
+  return base !== '/' && path.startsWith(base);
+};
+---
+
+<header
+  id="site-header"
+  class="site-header fixed inset-x-0 top-0 z-50 border-b border-transparent"
+  data-theme={theme}
+  data-solid="false"
+>
+  <div class="container-x flex h-[76px] items-center justify-between">
+    <Logo />
+
+    <nav class="hidden items-center gap-1 md:flex" aria-label="주 메뉴">
+      {site.nav.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'relative rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors hover:text-wine-3',
+            isActive(item.href) && 'after:absolute after:inset-x-4 after:-bottom-0.5 after:h-px after:bg-gold',
+          ]}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href={site.phoneHref}
+        class="ml-3 inline-flex items-center gap-2 rounded-full border border-current/25 px-4 py-2 text-[0.9rem] font-semibold transition-colors hover:border-gold hover:text-gold"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+        {site.phone}
+      </a>
+    </nav>
+
+    <button
+      id="nav-toggle"
+      class="grid size-11 place-items-center rounded-full md:hidden"
+      aria-label="메뉴 열기"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <span class="relative block h-[14px] w-6">
+        <span class="nav-bar absolute inset-x-0 top-0 h-[2px] rounded bg-current transition-all duration-300"></span>
+        <span class="nav-bar absolute inset-x-0 bottom-0 h-[2px] rounded bg-current transition-all duration-300"></span>
+      </span>
+    </button>
+  </div>
+
+  <div
+    id="mobile-nav"
+    class="pointer-events-none max-h-0 overflow-hidden bg-paper text-ink opacity-0 transition-all duration-500 ease-out-expo md:hidden"
+    aria-hidden="true"
+  >
+    <nav class="container-x flex flex-col py-4" aria-label="모바일 메뉴">
+      {site.nav.map((item) => (
+        <a href={item.href} class="border-b border-line py-4 text-lg font-medium" aria-current={isActive(item.href) ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))}
+      <a href={site.phoneHref} class="mt-4 inline-flex items-center justify-center rounded-full bg-wine py-3.5 font-semibold text-white">
+        {site.phone} 전화 상담
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const toggle = document.getElementById('nav-toggle')!;
+  const mobile = document.getElementById('mobile-nav')!;
+  const bars = toggle.querySelectorAll<HTMLElement>('.nav-bar');
+
+  const update = () => header.setAttribute('data-solid', String(window.scrollY > 24 || mobile.dataset.open === 'true'));
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+
+  toggle.addEventListener('click', () => {
+    const open = mobile.dataset.open !== 'true';
+    mobile.dataset.open = String(open);
+    mobile.classList.toggle('max-h-0', !open);
+    mobile.classList.toggle('max-h-[80vh]', open);
+    mobile.classList.toggle('opacity-0', !open);
+    mobile.classList.toggle('pointer-events-none', !open);
+    mobile.setAttribute('aria-hidden', String(!open));
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    bars[0].style.transform = open ? 'translateY(6px) rotate(45deg)' : '';
+    bars[1].style.transform = open ? 'translateY(-6px) rotate(-45deg)' : '';
+    update();
+  });
+  mobile.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => toggle.dispatchEvent(new Event('click'))));
+</script>

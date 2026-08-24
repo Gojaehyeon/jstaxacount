@@ -1,0 +1,60 @@
+# main 브랜치에 push 되면 빌드 → 검증 → GitHub Pages 배포까지 자동으로 수행합니다.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type & content check
+        run: npx astro check
+      - name: Build
+        run: npm run build
+      - name: Verify build output
+        run: npm run verify
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  smoke:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Live site smoke test
+        run: |
+          sleep 20
+          for p in / /about.html /services.html /notice.html /sitemap-index.xml; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -L "https://jsacc.co.kr$p")
+            echo "$p → $code"
+            [ "$code" = "200" ] || exit 1
+          done
+          curl -sL https://jsacc.co.kr/ | grep -q "주성회계법인" || { echo "본문에 법인명이 없습니다"; exit 1; }

@@ -1,0 +1,171 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import TeamCard from '../components/TeamCard.astro';
+import Stats from '../components/Stats.astro';
+import Contact from '../components/Contact.astro';
+import CTA from '../components/CTA.astro';
+import hero from '../assets/hero.jpg';
+import { site } from '../data/site';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const team = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
+const ceo = team.find((m) => m.data.featured) ?? team[0];
+const partners = team.filter((m) => m !== ceo);
+const notices = (await getCollection('notices'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+const fmt = (d: Date) => d.toISOString().slice(0, 10).replaceAll('-', '.');
+
+const privateItems = [
+  ['프라이빗 어카운팅(PA)', '기업을 위한 장부기장과 손익·경영관리 기초자료 구축'],
+  ['세무조정·신고', '소득세 및 법인세 세무조정 신고, 세무조사 대응'],
+  ['상속·증여 플래닝', '대주주·자산가의 상속세 신고와 세부담 최소화 설계'],
+  ['투자·절세 자문', '주식매도·투자자문 및 절세 플랜, 해외이민 세무자문'],
+  ['가업승계', '회사 분할·합병을 통한 가업승계 서비스'],
+];
+---
+
+<Base headerTheme="dark">
+  <!-- ===== Hero ===== -->
+  <section class="relative isolate flex min-h-[92svh] items-end overflow-hidden bg-ink text-white">
+    <Image
+      src={hero}
+      alt=""
+      widths={[720, 1280, 1920]}
+      sizes="100vw"
+      class="absolute inset-0 -z-20 size-full object-cover object-center"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink/55 via-ink/35 to-ink" aria-hidden="true"></div>
+    <div class="absolute inset-0 -z-10 bg-gradient-to-tr from-wine/45 via-transparent to-transparent" aria-hidden="true"></div>
+
+    <div class="container-x relative pt-40 pb-16 md:pb-24">
+      <p class="reveal eyebrow mb-6 !text-gold-2">Private Accounting &amp; Tax</p>
+      <h1 class="reveal display text-[2.6rem] sm:text-[3.6rem] lg:text-[4.4rem]" style="--reveal-delay:80ms">
+        사업의 모든 여정,<br />
+        <span class="text-gold-2">주성회계법인</span>과 함께.
+      </h1>
+      <p class="reveal mt-6 max-w-xl text-[1.05rem] leading-8 text-white/70 sm:text-[1.15rem]" style="--reveal-delay:160ms">
+        고객 한 분만을 위한 프라이빗 회계·세무 서비스. 사업의 시작부터 기업의 정점, 그리고 다음 세대로의 승계까지 함께합니다.
+      </p>
+      <div class="reveal mt-10 flex flex-col gap-3 sm:flex-row" style="--reveal-delay:240ms">
+        <Button href={site.phoneHref} variant="gold" size="lg">상담 문의 {site.phone}</Button>
+        <Button href="/services.html" variant="ghost-dark" size="lg">주요 업무 보기</Button>
+      </div>
+      <div class="mt-16 border-t border-white/15 pt-10">
+        <Stats invert class="max-w-2xl" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Philosophy ===== -->
+  <section class="py-20 md:py-28">
+    <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+      <div>
+        <SectionHead eyebrow="Private Service" title="고객 한 분만을 위한<br />프라이빗 서비스" />
+        <blockquote class="reveal mt-10 border-l-2 border-gold pl-6" style="--reveal-delay:120ms">
+          <p class="font-serif text-[1.5rem] leading-snug italic text-ink-2 sm:text-[1.7rem]">
+            “측정되지 않은 것은<br />관리되지 않는다.”
+          </p>
+          <cite class="mt-3 block text-[0.85rem] not-italic text-stone">— 피터 드러커</cite>
+        </blockquote>
+        <p class="reveal mt-8 text-[1.02rem] leading-8 text-stone" style="--reveal-delay:200ms">
+          회계장부는 단순한 장부가 아니라 절세를 위한 기본 포맷이며, 손익분석과 경영관리를 위한 기초자료입니다. 주성회계법인은 숫자를 관리하는 일에서 출발해 고객의 재무적 의사결정 전체를 함께 설계합니다.
+        </p>
+      </div>
+      <ul class="grid gap-3 self-center">
+        {privateItems.map(([t, d], i) => (
+          <li class="reveal flex gap-5 rounded-2xl bg-white p-5 ring-1 ring-line sm:p-6" style={`--reveal-delay:${i * 70}ms`}>
+            <span class="w-8 shrink-0 font-serif text-[1.4rem] leading-none text-gold">0{i + 1}</span>
+            <div>
+              <h3 class="font-semibold">{t}</h3>
+              <p class="mt-1 text-[0.92rem] leading-6 text-stone">{d}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section class="bg-white py-20 md:py-28">
+    <div class="container-x">
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <SectionHead eyebrow="Our Services" title="회계·세무·자산관리를<br />하나의 전략으로" lead="회계와 세무자문, FAS를 기본으로 금융·투자·부동산·상속·비영리법인 서비스를 통합해 고객 솔루션을 제공합니다." />
+        <Button href="/services.html" variant="ghost" class="reveal self-start md:self-auto">전체 업무 보기</Button>
+      </div>
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Team ===== -->
+  <section class="py-20 md:py-28">
+    <div class="container-x">
+      <SectionHead eyebrow="Our People" title="대형회계법인·금융회사·대기업에서<br />검증된 전문가" lead="공인회계사, 세무사, 경영컨설팅, M&amp;A 전문가가 각자의 실전 노하우로 고객에게 적합한 솔루션을 제공합니다." align="center" />
+
+      <div class="reveal mt-14 grid overflow-hidden rounded-3xl bg-ink text-white md:grid-cols-[0.9fr_1.1fr]">
+        <div class="relative aspect-[4/4.6] md:aspect-auto">
+          <Image src={ceo.data.photo} alt={`${ceo.data.title} ${ceo.data.name}`} width={800} height={920} class="absolute inset-0 size-full object-cover object-top" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent to-ink/40 hidden md:block" aria-hidden="true"></div>
+        </div>
+        <div class="flex flex-col justify-center p-8 sm:p-12">
+          <p class="eyebrow !text-gold-2">{ceo.data.role}</p>
+          <h3 class="display mt-3 text-[2rem] sm:text-[2.4rem]">{ceo.data.name} <span class="text-[1rem] font-medium text-white/60">{ceo.data.title}</span></h3>
+          <p class="mt-6 leading-8 text-white/70">
+            다양한 산업현장에서 쌓은 기업회계·세법·재무 전문지식을 기반으로 고객이 합리적이고 올바른 재무적 의사결정을 하도록 돕는 것을 사명으로 합니다.
+          </p>
+          <ul class="mt-6 grid gap-x-6 gap-y-1.5 text-[0.92rem] text-white/80 sm:grid-cols-2">
+            {ceo.data.career.slice(0, 6).map((c) => <li class="flex gap-2"><span class="mt-[0.7em] size-1 shrink-0 rounded-full bg-gold" aria-hidden="true"></span>{c}</li>)}
+          </ul>
+          <Button href="/about.html#team" variant="ghost-dark" class="mt-8 self-start">구성원 전체 보기</Button>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-6">
+        {partners.map((m, i) => (
+          <a href={`/about.html#member-${m.id}`} class="reveal group" style={`--reveal-delay:${i * 60}ms`}>
+            <div class="relative aspect-[4/4.6] overflow-hidden rounded-2xl bg-gradient-to-b from-paper-2 to-[#ddd5c9] ring-1 ring-line">
+              <Image src={m.data.photo} alt={`${m.data.title} ${m.data.name}`} width={400} height={460} class="size-full object-cover object-top transition-transform duration-700 ease-out-expo group-hover:scale-[1.04]" loading="lazy" />
+            </div>
+            <p class="mt-3 font-semibold">{m.data.name}</p>
+            <p class="text-[0.8rem] text-stone">{m.data.title}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Notice ===== -->
+  <section class="bg-white py-20 md:py-24">
+    <div class="container-x">
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <SectionHead eyebrow="Notice" title="공지사항" />
+        <a href="/notice.html" class="reveal text-[0.95rem] font-semibold text-wine hover:text-wine-3">전체 보기 →</a>
+      </div>
+      <ul class="mt-8 divide-y divide-line border-y border-line">
+        {notices.map((n, i) => (
+          <li class="reveal" style={`--reveal-delay:${i * 60}ms`}>
+            <a href={`/notice/${n.id}.html`} class="group flex flex-col gap-2 py-5 sm:flex-row sm:items-center sm:gap-8">
+              <span class="flex items-center gap-4 sm:contents">
+                <time datetime={n.data.date.toISOString()} class="font-serif text-[1rem] text-stone-2 sm:w-28">{fmt(n.data.date)}</time>
+                <span class="w-14 rounded-full bg-paper-2 px-2 py-0.5 text-center text-[0.75rem] font-medium text-ink-2">{n.data.category}</span>
+              </span>
+              <span class="flex-1 font-medium transition-colors group-hover:text-wine">{n.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Contact />
+  <CTA />
+</Base>

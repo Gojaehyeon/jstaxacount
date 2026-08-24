@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base title="페이지를 찾을 수 없습니다">
+  <section class="container-x flex min-h-[70svh] flex-col items-start justify-center pt-28">
+    <p class="eyebrow">404</p>
+    <h1 class="display mt-4 text-[2.2rem] sm:text-[3rem]">페이지를 찾을 수 없습니다</h1>
+    <p class="mt-4 max-w-md leading-8 text-stone">주소가 변경되었거나 삭제된 페이지입니다. 홈으로 이동하여 원하시는 내용을 찾아보시기 바랍니다.</p>
+    <Button href="/" class="mt-8">홈으로 이동</Button>
+  </section>
+</Base>

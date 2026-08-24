@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import TeamCard from '../components/TeamCard.astro';
+import Stats from '../components/Stats.astro';
+import CTA from '../components/CTA.astro';
+import ceoPhoto from '../assets/team/ceo.png';
+
+const team = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
+const reasons = [
+  ['풍부한 경험', '누적 상담 1,200건 이상의 실적을 바탕으로 고객에게 최적의 솔루션을 제공합니다.'],
+  ['전문가 팀', '20년 이상 경력의 공인회계사·세무사가 고객의 복잡한 요구사항을 해결합니다.'],
+  ['맞춤형 접근', '고객의 상황과 목표에 맞는 개별화된 서비스로 최상의 결과를 도출합니다.'],
+  ['신뢰와 비밀보장', '고객의 비밀을 철저히 보장하고, 정확하고 신뢰할 수 있는 정보로 자문합니다.'],
+];
+---
+
+<Base headerTheme="dark" title="법인소개" description="주성회계법인 소개. 대형회계법인·금융회사·대기업 실무경험을 갖춘 공인회계사, 세무사, M&A 전문가가 고객에게 적합한 솔루션을 제공합니다.">
+  <section class="bg-ink pt-40 pb-20 text-white md:pb-28">
+    <div class="container-x">
+      <p class="reveal eyebrow !text-gold-2">About Us</p>
+      <h1 class="reveal display mt-4 max-w-3xl text-[2.4rem] sm:text-[3.4rem]" style="--reveal-delay:80ms">
+        올바른 재무적 의사결정을<br />돕는 것이 우리의 사명입니다
+      </h1>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28">
+    <div class="container-x grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+      <div class="reveal relative overflow-hidden rounded-3xl bg-gradient-to-b from-paper-2 to-[#ddd5c9] ring-1 ring-line">
+        <Image src={ceoPhoto} alt="대표이사 공인회계사 고득성" width={800} height={800} class="aspect-square w-full object-cover object-top" loading="eager" />
+      </div>
+      <div class="self-center">
+        <p class="eyebrow reveal">Message</p>
+        <h2 class="reveal display mt-4 text-[1.8rem] sm:text-[2.2rem]" style="--reveal-delay:60ms">대표이사 / 공인회계사 고득성</h2>
+        <p class="reveal mt-6 text-[1.05rem] leading-8 text-ink-2" style="--reveal-delay:120ms">
+          주성회계법인은 다양한 산업현장에서 쌓은 기업회계와 세법, 재무 등 전문지식을 기반으로 고객이 합리적이고 올바른 재무적 의사결정을 하도록 돕는 것을 사명으로 합니다.
+        </p>
+        <p class="reveal mt-4 text-[1.05rem] leading-8 text-ink-2" style="--reveal-delay:180ms">
+          대형회계법인, 금융회사, 대기업에서 실무경험을 축적한 공인회계사, 세무사, 경영컨설팅, M&amp;A 전문가를 중심으로 고객에게 적합한 서비스를 제공하고, 각 구성원이 쌓아온 특별한 노하우와 실전경험을 바탕으로 고객의 필요를 충족하는 최고의 솔루션을 제공하겠습니다.
+        </p>
+        <Stats class="mt-10 max-w-lg" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20 md:py-28">
+    <div class="container-x">
+      <SectionHead eyebrow="Why Juseong" title="왜 주성회계법인인가" align="center" />
+      <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {reasons.map(([t, d], i) => (
+          <li class="reveal rounded-2xl bg-paper p-7 ring-1 ring-line" style={`--reveal-delay:${i * 80}ms`}>
+            <span class="font-serif text-[2rem] leading-none text-gold">0{i + 1}</span>
+            <h3 class="mt-5 text-[1.15rem] font-semibold">{t}</h3>
+            <p class="mt-2 text-[0.95rem] leading-7 text-stone">{d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="team" class="scroll-mt-20 py-20 md:py-28">
+    <div class="container-x">
+      <SectionHead eyebrow="Our People" title="구성원 소개" lead="20년 이상의 경력을 쌓은 전문가들로 이뤄진 주성회계법인의 구성원을 소개합니다." />
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {team.map((m, i) => <TeamCard member={m} index={i} detailed />)}
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</Base>

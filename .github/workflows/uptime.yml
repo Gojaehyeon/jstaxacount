@@ -1,0 +1,39 @@
+# 매일 09:00 KST 라이브 사이트 응답·SSL 만료를 점검하고, 실패 시 이슈를 자동 생성합니다.
+name: Uptime & SSL check
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 00:00 UTC = 09:00 KST
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: HTTP check
+        id: http
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 https://jsacc.co.kr/)
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "HTTP $code"
+      - name: SSL expiry check
+        id: ssl
+        run: |
+          exp=$(echo | openssl s_client -servername jsacc.co.kr -connect jsacc.co.kr:443 2>/dev/null | openssl x509 -noout -enddate | cut -d= -f2)
+          days=$(( ( $(date -d "$exp" +%s) - $(date +%s) ) / 86400 ))
+          echo "days=$days" >> "$GITHUB_OUTPUT"
+          echo "SSL expires in $days days ($exp)"
+      - name: Open issue on failure
+        if: steps.http.outputs.code != '200' || steps.ssl.outputs.days < 14
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `🚨 jsacc.co.kr 점검 실패 (${new Date().toISOString().slice(0,10)})`;
+            const body = `- HTTP 상태: ${{ steps.http.outputs.code }}\n- SSL 만료까지: ${{ steps.ssl.outputs.days }}일\n\n워크플로: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const { data: issues } = await github.rest.issues.listForRepo({ ...context.repo, state: 'open', labels: 'uptime' });
+            if (issues.length === 0) {
+              await github.rest.issues.create({ ...context.repo, title, body, labels: ['uptime'] });
+            }

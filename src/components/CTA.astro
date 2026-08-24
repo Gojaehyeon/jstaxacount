@@ -1,0 +1,25 @@
+---
+import Button from './Button.astro';
+import { site } from '../data/site';
+interface Props { title?: string; lead?: string }
+const {
+  title = '고객 한 분만을 위한<br class="hidden sm:block" /> 프라이빗 상담',
+  lead = '복잡한 세무·회계 문제일수록 첫 상담이 중요합니다. 전화 또는 이메일로 문의하시면 담당 회계사가 직접 답변드립니다.',
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-wine text-white">
+  <div class="pointer-events-none absolute -top-40 -right-40 size-[520px] rounded-full bg-wine-3/40 blur-3xl" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -bottom-48 -left-24 size-[420px] rounded-full bg-gold/15 blur-3xl" aria-hidden="true"></div>
+  <div class="container-x relative grid gap-10 py-20 md:grid-cols-[1.2fr_1fr] md:items-center md:py-28">
+    <div class="reveal">
+      <p class="eyebrow mb-4 !text-gold-2">Consultation</p>
+      <h2 class="display text-[2rem] sm:text-[2.6rem]" set:html={title} />
+      <p class="mt-5 max-w-lg text-[1.05rem] leading-8 text-white/70">{lead}</p>
+    </div>
+    <div class="reveal flex flex-col gap-3 sm:flex-row md:flex-col md:items-end" style="--reveal-delay:120ms">
+      <Button href={site.phoneHref} variant="gold" size="lg">{site.phone} 전화 상담</Button>
+      <Button href={`mailto:${site.email}`} variant="ghost-dark" size="lg">이메일 문의</Button>
+    </div>
+  </div>
+</section>

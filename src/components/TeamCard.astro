@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+interface Props { member: CollectionEntry<'team'>; index?: number; detailed?: boolean }
+const { member, index = 0, detailed = false } = Astro.props;
+const m = member.data;
+---
+
+<article
+  id={`member-${member.id}`}
+  class="reveal group scroll-mt-28 overflow-hidden rounded-2xl bg-white ring-1 ring-line"
+  style={`--reveal-delay:${(index % 4) * 70}ms`}
+>
+  <div class="relative aspect-[4/4.4] overflow-hidden bg-gradient-to-b from-paper-2 to-[#ddd5c9]">
+    <Image
+      src={m.photo}
+      alt={`${m.title} ${m.name}`}
+      width={640}
+      height={704}
+      class="size-full object-cover object-top transition-transform duration-700 ease-out-expo group-hover:scale-[1.03]"
+      loading="lazy"
+    />
+    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/55 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 p-5 text-white">
+      <p class="font-serif text-[0.8rem] italic tracking-[0.16em] uppercase text-gold-2">{m.role}</p>
+      <h3 class="mt-1 text-[1.4rem] font-bold tracking-tightest">{m.name} <span class="ml-1 text-[0.9rem] font-medium opacity-80">{m.title}</span></h3>
+    </div>
+  </div>
+
+  {detailed && (
+    <div class="grid gap-6 p-6 sm:grid-cols-2">
+      <div>
+        <h4 class="mb-2 text-[0.8rem] font-semibold tracking-[0.12em] text-stone-2 uppercase">주요 약력</h4>
+        <ul class="space-y-1.5 text-[0.92rem] leading-6 text-ink-2">
+          {m.career.map((c) => <li class="flex gap-2"><span class="mt-[0.7em] size-1 shrink-0 rounded-full bg-gold" aria-hidden="true"></span>{c}</li>)}
+        </ul>
+      </div>
+      {m.expertise.length > 0 && (
+        <div>
+          <h4 class="mb-2 text-[0.8rem] font-semibold tracking-[0.12em] text-stone-2 uppercase">전문 분야</h4>
+          <ul class="space-y-1.5 text-[0.92rem] leading-6 text-ink-2">
+            {m.expertise.map((c) => <li class="flex gap-2"><span class="mt-[0.7em] size-1 shrink-0 rounded-full bg-wine-3" aria-hidden="true"></span>{c}</li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  )}
+</article>
