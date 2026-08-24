@@ -105,6 +105,11 @@
 }
 .site-header[data-theme="dark"][data-solid="false"] { color: var(--color-white); }
 
+/* 헤더 로고: 다크 히어로 위에선 흰 워드마크, 흰 배경(스크롤/라이트 페이지)에선 원본 */
+.site-header .logo-white { display: none; }
+.site-header[data-theme="dark"][data-solid="false"] .logo-color { display: none; }
+.site-header[data-theme="dark"][data-solid="false"] .logo-white { display: block; }
+
 /* 다크 밴드 가로 스크롤 (스크롤바 숨김) */
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
