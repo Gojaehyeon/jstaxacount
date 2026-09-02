@@ -24,6 +24,7 @@ export const site = {
   nav: [
     { href: '/', label: '홈' },
     { href: '/about.html', label: '법인소개' },
+    { href: '/about.html#team', label: '주요구성원' },
     { href: '/services.html', label: '주요업무' },
     { href: '/notice.html', label: '공지사항' },
     { href: '/#inquiry', label: '상담 문의' },
