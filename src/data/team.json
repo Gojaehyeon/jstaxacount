@@ -113,12 +113,36 @@
     ]
   },
   {
+    "id": "sjj",
+    "name": "신재정",
+    "title": "파트너 / 공인회계사",
+    "role": "파트너",
+    "photo": "../assets/team/sjj.jpg",
+    "order": 7,
+    "career": [
+      "동국대학교 경제학과",
+      "서강대학교 경제대학원 중퇴",
+      "공인회계사(KICPA) / 세무사",
+      "신정회계법인",
+      "휠라코리아(주) 재무전략팀장",
+      "회계법인이상 파트너",
+      "(현) 주성회계법인 파트너"
+    ],
+    "expertise": [
+      "개별·연결 재무제표 회계감사 및 세무자문",
+      "비상장사 합병 회계 및 세무자문",
+      "공익법인 회계감사 및 세무자문",
+      "재무실사 및 기업가치평가",
+      "상속세·증여세·가업승계 자문"
+    ]
+  },
+  {
     "id": "cjh",
     "name": "차주현",
     "title": "이사 / 공인회계사",
     "role": "이사",
     "photo": "../assets/team/cjh.png",
-    "order": 7,
+    "order": 8,
     "career": [
       "인하대학교 경영학과",
       "(전) 신정회계법인",
@@ -138,7 +162,7 @@
     "role": "자문역",
     "affiliation": "ALL ABOUT TAX LLC 대표 (미국 뉴저지)",
     "photo": "../assets/team/yoon.jpg",
-    "order": 8,
+    "order": 9,
     "career": [
       "고려대학교 경영학 학사",
       "University of Cambridge MBA",
