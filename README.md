@@ -50,7 +50,7 @@ npm run preview    # 빌드 결과 미리보기
 
 홈 `#inquiry` 섹션의 폼은 [Web3Forms](https://web3forms.com)(무료, 월 250건)로 이메일 전송됩니다.
 
-1. web3forms.com 에서 수신 이메일 `admin@jsacc.co.kr` 입력 → 메일로 받은 Access Key 복사
+1. web3forms.com 에서 수신 이메일 `dsgo@jsacc.co.kr` 입력 → 메일로 받은 Access Key 복사
 2. `src/data/site.ts` → `inquiry.accessKey`에 붙여넣고 main push
 3. 키가 비어 있는 동안에는 방문자의 메일 앱이 열리는 방식(mailto)으로 동작합니다.
 

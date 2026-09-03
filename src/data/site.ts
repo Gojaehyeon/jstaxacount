@@ -7,10 +7,10 @@ export const site = {
   url: 'https://jsacc.co.kr',
   address: '서울시 강남구 논현로 616, 4층 (논현동)',
   addressShort: '강남구 논현로 616, 4층',
-  phone: '02-2038-4832',
-  phoneHref: 'tel:0220384832',
+  phone: '02-2038-2015',
+  phoneHref: 'tel:0220382015',
   fax: '02-2038-2018',
-  email: 'admin@jsacc.co.kr',
+  email: 'dsgo@jsacc.co.kr',
   hours: '평일 09:00 – 18:00',
   // 카카오 약도 위젯. cdn 은 https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js 안의 `var a="..."` 값이며
   // uptime 워크플로가 매일 변경 여부를 점검합니다(변경 시 이슈 생성).
@@ -32,13 +32,13 @@ export const site = {
   ],
   /**
    * 온라인 문의 폼 전송 설정 (Web3Forms, https://web3forms.com — 무료, 월 250건).
-   * accessKey 발급: web3forms.com 에서 수신 이메일(admin@jsacc.co.kr)을 입력하면 키가 메일로 옵니다.
+   * accessKey 발급: web3forms.com 에서 수신 이메일(dsgo@jsacc.co.kr)을 입력하면 키가 메일로 옵니다.
    * 키가 비어 있으면 폼은 메일 앱(mailto)으로 대체 전송됩니다.
    */
   inquiry: {
     endpoint: 'https://api.web3forms.com/submit',
     accessKey: '',
-    to: 'admin@jsacc.co.kr',
+    to: 'dsgo@jsacc.co.kr',
     topics: ['회계감사', '세무자문', '프라이빗 웰쓰(상속·증여)', '미국 세무자문', '재무자문(M&A·가치평가)', '기타'],
   },
 } as const;
